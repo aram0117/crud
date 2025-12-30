@@ -1,18 +1,24 @@
 package com.basic.crud;
 
-import java.util.List;
+import javax.swing.plaf.PanelUI;
 
 public class GlobalResponse<T> {
-    private boolean success;
-    private String message;
-    private T data;
 
-    public GlobalResponse (boolean success, String message, T data){
+    // 속
+    private final boolean success;
+    private final int errorCode;
+    private final String message;
+    private final T data;
+
+    // 생
+    public GlobalResponse(boolean success, int errorCode, String message, T data) {
         this.success = success;
+        this.errorCode = errorCode;
         this.message = message;
         this.data = data;
     }
 
+    // 기
     public String getMessage() {
         return message;
     }
@@ -21,11 +27,15 @@ public class GlobalResponse<T> {
         return data;
     }
 
-    public static <T> GlobalResponse<T> success(String message, T data) {
-        return new GlobalResponse<>(true, message, data);
+    public static <T> GlobalResponse<T> success(String message, int errorCode, T data) {
+        return new GlobalResponse<>(true, errorCode, message, data);
     }
 
-    public static <T> GlobalResponse<Void> successNoDate(String message) {
-        return new GlobalResponse<>(true, message, null);
+    public static GlobalResponse exception(String message, int errorCode) {
+        return new GlobalResponse<>(false, errorCode, message, null);
+    }
+
+    public static <T> GlobalResponse<Void> successNoData(String message, int errorCode) {
+        return new GlobalResponse<>(true, errorCode, message, null);
     }
 }
