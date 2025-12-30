@@ -1,10 +1,10 @@
-package com.basic.crud.dto.response;
+package com.basic.crud.member.dto.response;
 
 import java.util.List;
 
 public class GetAllMemberResponseDto {
-    private final List<MemberDto> memberDtoList;
 
+    private final List<MemberDto> memberDtoList;
 
     public GetAllMemberResponseDto(List<MemberDto> memberDtoList) {
         this.memberDtoList = memberDtoList;

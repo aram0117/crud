@@ -1,4 +1,4 @@
-package com.basic.crud.entity;
+package com.basic.crud.member.entity;
 
 import jakarta.persistence.*;
 
@@ -25,10 +25,18 @@ public class Member {
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;   // 삭제 여부
 
+    @Column(name = "email", unique = true)
+    private String email;
+
+    @Column(name = "password")
+    private String password;
+
     protected Member() {}  // JPA 기본 생성자
 
-    public Member(String name) {
+    public Member(String name, String email, String password) {
         this.name = name;
+        this.email = email;
+        this.password = password;
     }
 
     @PrePersist
@@ -39,7 +47,9 @@ public class Member {
 
     @PreUpdate
     protected void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now(
+
+        );
     }
 
     public Long getId() {
@@ -64,6 +74,14 @@ public class Member {
 
     public boolean getIsDelete() {
         return isDeleted;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void deleteMember() {
